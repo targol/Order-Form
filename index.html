@@ -132,105 +132,118 @@
     </div>
   </form>
 
-  <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
-                       
-    function updateTotal() {
-      const rows = document.querySelectorAll("#product-table tr");
-      let rawTotal = 0;
-      rows.forEach((row) => {
-        const price = parseInt(row.cells[1].textContent);
-        const qty = parseInt(row.cells[2].querySelector("input").value) || 0;
-        const rowTotal = price * qty;
-        row.cells[3].textContent = rowTotal;
-        rawTotal += rowTotal;
+ <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
+
+  function updateTotal() {
+    const rows = document.querySelectorAll("#product-table tr");
+    let rawTotal = 0;
+
+    rows.forEach((row) => {
+      const price = parseInt(row.dataset.price);
+      const inputs = row.querySelectorAll('input[type="number"]');
+      let rowQty = 0;
+
+      inputs.forEach((input) => {
+        rowQty += parseInt(input.value) || 0;
       });
 
-     let discount = 0;
-     if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
-     else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
-          else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
-               else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
-                    else if (rawTotal > 40000000) discount = rawTotal * 0.3;
-                         else discount = 0;
+      const rowTotal = rowQty * price;
+      row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
+      rawTotal += rowTotal;
+    });
 
-      const finalTotal = rawTotal - discount;
+    let discount = 0;
+    if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
+    else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
+    else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
+    else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
+    else if (rawTotal > 40000000) discount = rawTotal * 0.30;
 
-      document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
-      document.getElementById("discount-amount").textContent = discount.toLocaleString();
-      document.getElementById("final-total").textContent = finalTotal.toLocaleString();
-    }
+    const finalTotal = rawTotal - discount;
 
-    function clearForm() {
-      document.querySelectorAll("#product-table input").forEach((input) => (input.value = 0));
-      document.getElementById("address").value = "";
-      document.getElementById("fullName").value = "";
-      document.getElementById("phone").value = "";
-      document.getElementById("send-whatsapp").checked = false;
-      updateTotal();
-    }
+    document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
+    document.getElementById("discount-amount").textContent = discount.toLocaleString();
+    document.getElementById("final-total").textContent = finalTotal.toLocaleString();
+  }
 
-    function submitForm(e) {
-      e.preventDefault();
-
-      const fullName = document.getElementById("fullName").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const address = document.getElementById("address").value.trim();
-
-      if (!fullName || !phone || !address) {
-        alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
-        return;
-      }
-
-      const rows = document.querySelectorAll("#product-table tr");
-      const order = [];
-      rows.forEach((row) => {
-        const name = row.cells[0].textContent;
-        const qty = parseInt(row.cells[2].querySelector("input").value) || 0;
-        if (qty > 0) order.push(`${name}: ${qty}`);
-      });
-
-      if (order.length === 0) {
-        alert("لطفاً حداقل یک محصول را انتخاب کنید.");
-        return;
-      }
-
-      const raw = document.getElementById("raw-total").textContent;
-      const discount = document.getElementById("discount-amount").textContent;
-      const final = document.getElementById("final-total").textContent;
-
-      const formData = new FormData();
-      formData.append("نام و نام خانوادگی", fullName);
-      formData.append("شماره تماس", phone);
-      formData.append("محصولات", order.join(" | "));
-      formData.append("جمع کل", raw);
-      formData.append("تخفیف", discount);
-      formData.append("مبلغ نهایی", final);
-      formData.append("آدرس", address);
-
-      fetch(scriptURL, { method: "POST", body: formData })
-        .then(() => {
-          if (document.getElementById("send-whatsapp").checked)
-            sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
-          else alert("سفارش با موفقیت ثبت شد ✅");
-        })
-        .catch(() => alert("خطا در ثبت سفارش ❌"));
-    }
-
-    function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
-      let message = `سفارش ماگ:\nنام و نام خانوادگی: ${fullName}\nشماره تماس: ${phone}\n`;
-      message += order.map((x) => "- " + x).join("\n");
-      message += `\n\nجمع کل: ${raw} تومان`;
-      if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
-      message += `\nمبلغ قابل پرداخت: ${final} تومان`;
-      message += `\nآدرس ارسال: ${address}`;
-
-      const phoneWA = "09361189022";
-      const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
-      window.open(url, "_blank");
-    }
-
+  function clearForm() {
+    document.querySelectorAll("#product-table input").forEach((input) => (input.value = 0));
+    document.getElementById("address").value = "";
+    document.getElementById("fullName").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("send-whatsapp").checked = false;
     updateTotal();
-  </script>
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!fullName || !phone || !address) {
+      alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
+      return;
+    }
+
+    const rows = document.querySelectorAll("#product-table tr");
+    const order = [];
+
+    rows.forEach((row) => {
+      const product = row.cells[0].textContent;
+      const inputs = row.querySelectorAll('input[type="number"]');
+      inputs.forEach((input) => {
+        const qty = parseInt(input.value) || 0;
+        const color = input.name.split("-")[1];
+        if (qty > 0) {
+          order.push(`${product} (${color}): ${qty}`);
+        }
+      });
+    });
+
+    if (order.length === 0) {
+      alert("لطفاً حداقل یک محصول را انتخاب کنید.");
+      return;
+    }
+
+    const raw = document.getElementById("raw-total").textContent;
+    const discount = document.getElementById("discount-amount").textContent;
+    const final = document.getElementById("final-total").textContent;
+
+    const formData = new FormData();
+    formData.append("نام و نام خانوادگی", fullName);
+    formData.append("شماره تماس", phone);
+    formData.append("محصولات", order.join(" | "));
+    formData.append("جمع کل", raw);
+    formData.append("تخفیف", discount);
+    formData.append("مبلغ نهایی", final);
+    formData.append("آدرس", address);
+
+    fetch(scriptURL, { method: "POST", body: formData })
+      .then(() => {
+        if (document.getElementById("send-whatsapp").checked)
+          sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
+        else alert("سفارش با موفقیت ثبت شد ✅");
+      })
+      .catch(() => alert("خطا در ثبت سفارش ❌"));
+  }
+
+  function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
+    let message = `سفارش:\nنام: ${fullName}\nشماره: ${phone}\n`;
+    message += order.map((x) => "- " + x).join("\n");
+    message += `\n\nجمع کل: ${raw} تومان`;
+    if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
+    message += `\nمبلغ نهایی: ${final} تومان`;
+    message += `\nآدرس: ${address}`;
+
+    const phoneWA = "09361189022";
+    const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  }
+
+  updateTotal();
+</script>
 </body>
 </html>
