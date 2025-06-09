@@ -304,42 +304,38 @@
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
 
-    function updateTotal() {
-    let totalPrice = 0; // برای جمع کل قیمت‌ها
+  function updateTotal() {
+    let totalPrice = 0;
     const rows = document.querySelectorAll("tr[data-price]");
 
     rows.forEach(row => {
-      const pricePerItem = parseInt(row.getAttribute('data-price'));
-      let rowTotal = 0;
-
-      const inputs = row.querySelectorAll("input[type='number']");
-      inputs.forEach(input => {
-        const quantity = parseInt(input.value) || 0;
-        rowTotal += pricePerItem * quantity; // محاسبه جمع ردیف
+      const pricePerItem = parseInt(row.getAttribute('data-price')) || 0;
+      let rowQty = 0;
+      row.querySelectorAll("input[type='number']").forEach(input => {
+        rowQty += parseInt(input.value) || 0;
       });
-
-      row.querySelector(".row-total").textContent = rowTotal; // نمایش جمع ردیف
-      totalPrice += rowTotal; // اضافه کردن جمع ردیف به کل قیمت
+      const rowTotal = rowQty * pricePerItem;
+      row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
+      totalPrice += rowTotal;
     });
 
-    document.getElementById("total-price").textContent = totalPrice; // نمایش قیمت کل
-  }
-
-    });
+    const rawTotal = totalPrice;
     let discount = 0;
     if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
     else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
     else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
     else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
     else if (rawTotal > 40000000) discount = rawTotal * 0.30;
+
     const finalTotal = rawTotal - discount;
+
     document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
     document.getElementById("discount-amount").textContent = discount.toLocaleString();
     document.getElementById("final-total").textContent = finalTotal.toLocaleString();
   }
 
   function clearForm() {
-    document.querySelectorAll("#product-table input").forEach((input) => (input.value = 0));
+    document.querySelectorAll("#product-table input[type='number']").forEach(i => i.value = 0);
     document.getElementById("address").value = "";
     document.getElementById("fullName").value = "";
     document.getElementById("phone").value = "";
@@ -352,28 +348,33 @@
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const address = document.getElementById("address").value.trim();
+
     if (!fullName || !phone || !address) {
       alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
       return;
     }
-    const rows = document.querySelectorAll("#product-table tr");
+
     const order = [];
-    rows.forEach((row) => {
+    document.querySelectorAll("#product-table tr[data-price]").forEach(row => {
       const product = row.cells[0].textContent;
-      const inputs = row.querySelectorAll('input[type="number"]');
-      inputs.forEach((input) => {
+      row.querySelectorAll("input[type='number']").forEach(input => {
         const qty = parseInt(input.value) || 0;
-        const color = input.name.split("-")[1];
-        if (qty > 0) order.push(`${product} (${color}): ${qty}`);
+        if (qty > 0) {
+          const color = input.name.split("-").pop().trim();
+          order.push(`${product} (${color}): ${qty}`);
+        }
       });
     });
+
     if (order.length === 0) {
       alert("لطفاً حداقل یک محصول را انتخاب کنید.");
       return;
     }
+
     const raw = document.getElementById("raw-total").textContent;
     const discount = document.getElementById("discount-amount").textContent;
     const final = document.getElementById("final-total").textContent;
+
     const formData = new FormData();
     formData.append("نام و نام خانوادگی", fullName);
     formData.append("شماره تماس", phone);
@@ -382,37 +383,37 @@
     formData.append("تخفیف", discount);
     formData.append("مبلغ نهایی", final);
     formData.append("آدرس", address);
+
     fetch(scriptURL, { method: "POST", body: formData })
       .then(() => {
         if (document.getElementById("send-whatsapp").checked)
           sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
-        else alert("سفارش با موفقیت ثبت شد ✅");
+        else {
+          alert("سفارش با موفقیت ثبت شد ✅");
+          clearForm();
+        }
       })
       .catch(() => alert("خطا در ثبت سفارش ❌"));
   }
 
   function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
-    let message = `سفارش:
-نام: ${fullName}
-شماره: ${phone}
-`;
-    message += order.map((x) => "- " + x).join("
-");
-    message += `
+    let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n`;
+    message += order.map(x => "- " + x).join("\n");
+    message += `\n\nجمع کل: ${raw} تومان`;
+    if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
+    message += `\nمبلغ نهایی: ${final} تومان`;
+    message += `\nآدرس: ${address}`;
 
-جمع کل: ${raw} تومان`;
-    if (discount !== "0") message += `
-تخفیف: ${discount} تومان`;
-    message += `
-مبلغ نهایی: ${final} تومان`;
-    message += `
-آدرس: ${address}`;
     const phoneWA = "09361189022";
     const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   }
 
+  document.getElementById("order-form").addEventListener("submit", submitForm);
+  document.querySelector(".btn-clear").addEventListener("click", clearForm);
+
   updateTotal();
 </script>
+
 </body>
 </html>
