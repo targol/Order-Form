@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>فرم سفارش ماگ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: sans-serif; direction: rtl; background: #f5f5f5; padding: 20px; }
+    body { font-family: sans-serif; direction: rtl; padding: 20px; background: #f5f5f5; }
     h2 { text-align: center; }
     table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
     th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
-    input[type="number"], input[type="text"] { width: 100%; padding: 5px; box-sizing: border-box; }
+    input[type="number"], input[type="text"], input[type="tel"] { width: 100%; padding: 5px; box-sizing: border-box; }
     .summary, .payment, .whatsapp { background: #fff; padding: 15px; border-radius: 8px; margin-top: 15px; }
     .btn { padding: 10px 20px; margin-top: 10px; cursor: pointer; border: none; border-radius: 5px; }
     .btn-clear { background: #e74c3c; color: white; }
     .btn-send { background: #2ecc71; color: white; }
-    .logo { text-align: left; margin-bottom: 10px; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
-
-  <div class="logo">
-    <img src="https://via.placeholder.com/100x50.png?text=لوگو" alt="لوگو" style="height: 50px;">
-  </div>
-
   <h2>فرم سفارش ماگ</h2>
 
   <form id="order-form" onsubmit="submitForm(event)">
+    <label for="fullName">نام و نام خانوادگی:</label>
+    <input type="text" id="fullName" name="fullName" required placeholder="مثلاً: علی رضایی">
+
+    <label for="phone">شماره تماس:</label>
+    <input type="tel" id="phone" name="phone" required placeholder="مثلاً: 09123456789" pattern="[0-9]{10,11}">
+
     <table>
       <thead>
         <tr>
@@ -36,37 +37,57 @@
         </tr>
       </thead>
       <tbody id="product-table">
-        <tr><td>ماگ شیار دار - آبی</td><td>125000</td><td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td><td class="row-total">0</td></tr>
-        <tr><td>ماگ شیار دار - زرد</td><td>125000</td><td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td><td class="row-total">0</td></tr>
-        <tr><td>ماگ شیار دار - قرمز</td><td>125000</td><td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td><td class="row-total">0</td></tr>
-        <tr><td>ماگ لاستر - زرشکی</td><td>175000</td><td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td><td class="row-total">0</td></tr>
-        <tr><td>ماگ لاستر - سورمه‌ای</td><td>175000</td><td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td><td class="row-total">0</td></tr>
+        <tr>
+          <td>ماگ شیار دار - آبی</td>
+          <td>125000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()" /></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ شیار دار - زرد</td>
+          <td>125000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()" /></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ شیار دار - قرمز</td>
+          <td>125000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()" /></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ لاستر - زرشکی</td>
+          <td>175000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()" /></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ لاستر - سورمه‌ای</td>
+          <td>175000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()" /></td>
+          <td class="row-total">0</td>
+        </tr>
       </tbody>
     </table>
 
     <div class="summary">
-      <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br>
-      <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br>
+      <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
+      <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
       <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
     </div>
 
     <div class="payment">
-      <strong>💳 لطفاً مبلغ را به کارت زیر واریز نمایید:</strong><br>
-      <p>6054-3211-1354-8915 - به نام نیما حکیمی</p>
-    </div>
-
-    <div class="fullname">
-      <label>👤 نام و نام خانوادگی:</label>
-      <input type="text" id="fullname" name="fullname" required placeholder="مثلاً: نیما حکیمی">
+      <strong>لطفاً مبلغ را به کارت زیر واریز نمایید:</strong><br />
+      <p>💳 6054-3211-1354-8915 - به نام ترگل</p>
     </div>
 
     <div class="address">
-      <label>📍 آدرس ارسال:</label>
-      <input type="text" id="address" name="address" required placeholder="مثلاً: تهران، بلوار…">
+      <label for="address">📍 آدرس ارسال:</label>
+      <input type="text" id="address" name="address" required placeholder="مثلاً: تهران، بلوار..." />
     </div>
 
     <div>
-      <label><input type="checkbox" id="send-whatsapp"> ارسال سفارش به واتساپ</label>
+      <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
     </div>
 
     <div class="whatsapp">
@@ -81,7 +102,7 @@
     function updateTotal() {
       const rows = document.querySelectorAll("#product-table tr");
       let rawTotal = 0;
-      rows.forEach(row => {
+      rows.forEach((row) => {
         const price = parseInt(row.cells[1].textContent);
         const qty = parseInt(row.cells[2].querySelector("input").value) || 0;
         const rowTotal = price * qty;
@@ -101,9 +122,10 @@
     }
 
     function clearForm() {
-      document.querySelectorAll("#product-table input").forEach(input => input.value = 0);
+      document.querySelectorAll("#product-table input").forEach((input) => (input.value = 0));
       document.getElementById("address").value = "";
-      document.getElementById("fullname").value = "";
+      document.getElementById("fullName").value = "";
+      document.getElementById("phone").value = "";
       document.getElementById("send-whatsapp").checked = false;
       updateTotal();
     }
@@ -111,47 +133,61 @@
     function submitForm(e) {
       e.preventDefault();
 
+      const fullName = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+
+      if (!fullName || !phone || !address) {
+        alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
+        return;
+      }
+
       const rows = document.querySelectorAll("#product-table tr");
       const order = [];
-      rows.forEach(row => {
+      rows.forEach((row) => {
         const name = row.cells[0].textContent;
         const qty = parseInt(row.cells[2].querySelector("input").value) || 0;
         if (qty > 0) order.push(`${name}: ${qty}`);
       });
 
+      if (order.length === 0) {
+        alert("لطفاً حداقل یک محصول را انتخاب کنید.");
+        return;
+      }
+
       const raw = document.getElementById("raw-total").textContent;
       const discount = document.getElementById("discount-amount").textContent;
       const final = document.getElementById("final-total").textContent;
-      const address = document.getElementById("address").value;
-      const fullname = document.getElementById("fullname").value;
 
       const formData = new FormData();
-      formData.append("نام و نام خانوادگی", fullname);
+      formData.append("نام و نام خانوادگی", fullName);
+      formData.append("شماره تماس", phone);
       formData.append("محصولات", order.join(" | "));
       formData.append("جمع کل", raw);
       formData.append("تخفیف", discount);
       formData.append("مبلغ نهایی", final);
       formData.append("آدرس", address);
 
-      fetch(scriptURL, { method: 'POST', body: formData })
+      fetch(scriptURL, { method: "POST", body: formData })
         .then(() => {
           if (document.getElementById("send-whatsapp").checked)
-            sendToWhatsApp(fullname, order, raw, discount, final, address);
-          else
-            alert("سفارش با موفقیت ثبت شد ✅");
+            sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
+          else alert("سفارش با موفقیت ثبت شد ✅");
         })
-        .catch(() => alert("❌ خطا در ثبت سفارش"));
+        .catch(() => alert("خطا در ثبت سفارش ❌"));
     }
 
-    function sendToWhatsApp(fullname, order, raw, discount, final, address) {
-      let message = `👤 نام: ${fullname}\nسفارش ماگ:\n` + order.map(x => "- " + x).join("\n");
+    function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
+      let message = `سفارش ماگ:\nنام و نام خانوادگی: ${fullName}\nشماره تماس: ${phone}\n`;
+      message += order.map((x) => "- " + x).join("\n");
       message += `\n\nجمع کل: ${raw} تومان`;
       if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
       message += `\nمبلغ قابل پرداخت: ${final} تومان`;
       message += `\nآدرس ارسال: ${address}`;
-      const phone = "09361189022";
-      const url = `https://wa.me/98${phone.slice(1)}?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
+
+      const phoneWA = "09361189022";
+      const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
     }
 
     updateTotal();
