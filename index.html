@@ -19,71 +19,79 @@
 <body>
   <h2>فرم سفارش ماگ</h2>
 
-  <table>
-    <thead>
-      <tr>
-        <th>نام محصول</th>
-        <th>قیمت (تومان)</th>
-        <th>تعداد</th>
-        <th>جمع ردیف</th>
-      </tr>
-    </thead>
-    <tbody id="product-table">
-      <tr>
-        <td>ماگ شیار دار - آبی</td>
-        <td>125000</td>
-        <td><input type="number" min="0" value="0" onchange="updateTotal()"></td>
-        <td class="row-total">0</td>
-      </tr>
-      <tr>
-        <td>ماگ شیار دار - زرد</td>
-        <td>125000</td>
-        <td><input type="number" min="0" value="0" onchange="updateTotal()"></td>
-        <td class="row-total">0</td>
-      </tr>
-      <tr>
-        <td>ماگ شیار دار - قرمز</td>
-        <td>125000</td>
-        <td><input type="number" min="0" value="0" onchange="updateTotal()"></td>
-        <td class="row-total">0</td>
-      </tr>
-      <tr>
-        <td>ماگ لاستر - زرشکی</td>
-        <td>175000</td>
-        <td><input type="number" min="0" value="0" onchange="updateTotal()"></td>
-        <td class="row-total">0</td>
-      </tr>
-      <tr>
-        <td>ماگ لاستر - سورمه‌ای</td>
-        <td>175000</td>
-        <td><input type="number" min="0" value="0" onchange="updateTotal()"></td>
-        <td class="row-total">0</td>
-      </tr>
-    </tbody>
-  </table>
+  <form id="order-form" onsubmit="submitForm(event)">
+    <table>
+      <thead>
+        <tr>
+          <th>نام محصول</th>
+          <th>قیمت (تومان)</th>
+          <th>تعداد</th>
+          <th>جمع ردیف</th>
+        </tr>
+      </thead>
+      <tbody id="product-table">
+        <tr>
+          <td>ماگ شیار دار - آبی</td>
+          <td>125000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ شیار دار - زرد</td>
+          <td>125000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ شیار دار - قرمز</td>
+          <td>125000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ لاستر - زرشکی</td>
+          <td>175000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td>
+          <td class="row-total">0</td>
+        </tr>
+        <tr>
+          <td>ماگ لاستر - سورمه‌ای</td>
+          <td>175000</td>
+          <td><input name="qty" type="number" min="0" value="0" onchange="updateTotal()"></td>
+          <td class="row-total">0</td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div class="summary">
-    <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br>
-    <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br>
-    <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
-  </div>
+    <div class="summary">
+      <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br>
+      <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br>
+      <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
+    </div>
 
-  <div class="payment">
-    <strong>لطفاً مبلغ را به کارت زیر واریز نمایید:</strong><br>
-    <p>💳 6054-3211-1354-8915 - به نام ترگل</p>
-  </div>
+    <div class="payment">
+      <strong>لطفاً مبلغ را به کارت زیر واریز نمایید:</strong><br>
+      <p>💳 6054-3211-1354-8915 - به نام ترگل</p>
+    </div>
 
-  <div class="address">
-    <label>📍 آدرس ارسال:</label>
-    <input type="text" id="address" placeholder="مثلاً: تهران، بلوار…">
-  </div>
+    <div class="address">
+      <label>📍 آدرس ارسال:</label>
+      <input type="text" id="address" name="address" required placeholder="مثلاً: تهران، بلوار…">
+    </div>
 
-  <div class="whatsapp">
-    <button class="btn btn-send" onclick="sendToWhatsApp()">ارسال سفارش در واتساپ</button>
-    <button class="btn btn-clear" onclick="clearForm()">پاک کردن فرم</button>
-  </div>
+    <div>
+      <label><input type="checkbox" id="send-whatsapp"> ارسال سفارش به واتساپ</label>
+    </div>
+
+    <div class="whatsapp">
+      <button class="btn btn-send" type="submit">ثبت سفارش</button>
+      <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
+    </div>
+  </form>
 
   <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbylL9dfPbQwA0vILI1IJwDtE5RE75pHR7qutYW75dXDJ4ts2k7Kpzi_SWBdc_SG1Rw/exec';
+
     function updateTotal() {
       const rows = document.querySelectorAll("#product-table tr");
       let rawTotal = 0;
@@ -96,11 +104,9 @@
       });
 
       let discount = 0;
-      if (rawTotal >= 5000000) {
-        discount = rawTotal * 0.2;
-      } else if (rawTotal >= 3000000) {
-        discount = rawTotal * 0.1;
-      }
+      if (rawTotal >= 5000000) discount = rawTotal * 0.2;
+      else if (rawTotal >= 3000000) discount = rawTotal * 0.1;
+
       const finalTotal = rawTotal - discount;
 
       document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
@@ -111,18 +117,19 @@
     function clearForm() {
       document.querySelectorAll("#product-table input").forEach(input => input.value = 0);
       document.getElementById("address").value = "";
+      document.getElementById("send-whatsapp").checked = false;
       updateTotal();
     }
 
-    function sendToWhatsApp() {
+    function submitForm(e) {
+      e.preventDefault();
+
       const rows = document.querySelectorAll("#product-table tr");
-      let message = "سفارش ماگ:\n";
+      const order = [];
       rows.forEach(row => {
         const name = row.cells[0].textContent;
-        const qty = parseInt(row.cells[2].querySelector("input").value);
-        if (qty > 0) {
-          message += `- ${name}: ${qty} عدد\n`;
-        }
+        const qty = parseInt(row.cells[2].querySelector("input").value) || 0;
+        if (qty > 0) order.push(`${name}: ${qty}`);
       });
 
       const raw = document.getElementById("raw-total").textContent;
@@ -130,12 +137,29 @@
       const final = document.getElementById("final-total").textContent;
       const address = document.getElementById("address").value;
 
-      message += `\nجمع کل: ${raw} تومان`;
+      const formData = new FormData();
+      formData.append("محصولات", order.join(" | "));
+      formData.append("جمع کل", raw);
+      formData.append("تخفیف", discount);
+      formData.append("مبلغ نهایی", final);
+      formData.append("آدرس", address);
+
+      fetch(scriptURL, { method: 'POST', body: formData })
+        .then(() => {
+          if (document.getElementById("send-whatsapp").checked) sendToWhatsApp(order, raw, discount, final, address);
+          else alert("سفارش با موفقیت ثبت شد ✅");
+        })
+        .catch(err => alert("خطا در ثبت سفارش ❌"));
+    }
+
+    function sendToWhatsApp(order, raw, discount, final, address) {
+      let message = "سفارش ماگ:\n" + order.map(x => "- " + x).join("\n");
+      message += `\n\nجمع کل: ${raw} تومان`;
       if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
       message += `\nمبلغ قابل پرداخت: ${final} تومان`;
       message += `\nآدرس ارسال: ${address}`;
 
-      const phone = "09124323466";
+      const phone = "09361189022";
       const url = `https://wa.me/98${phone.slice(1)}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
     }
