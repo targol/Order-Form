@@ -79,20 +79,21 @@
     </div>
 
     <div class="payment">
-      <strong>لطفاً مبلغ را به کارت زیر واریز نمایید:</strong><br />
-      <p>💳 6054-3211-1354-8915 - به نام نیما حمکیمی</p>
+      <strong>لطفاً مبلغ را به نام مهتاب فتاحی واریز نمایید:</strong><br />
+      <p>💳 5041-7212-0097-2017 </p>
+      <p>💳 Ir420700010001110103791001 </p>
     </div>
 
     <form id="order-form" onsubmit="submitForm(event)">
     <label for="fullName">نام و نام خانوادگی:</label>
-    <input type="text" id="fullName" name="fullName" required placeholder="مثلاً: علی رضایی">
+    <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
 
     <label for="phone">شماره تماس:</label>
-    <input type="tel" id="phone" name="phone" required placeholder="مثلاً: 09123456789" pattern="[0-9]{10,11}">
+    <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
       
     <div class="address">
       <label for="address">📍 آدرس ارسال:</label>
-      <input type="text" id="address" name="address" required placeholder="مثلاً: تهران، بلوار..." />
+      <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
     </div>
 
     <div>
@@ -120,8 +121,11 @@
       });
 
       let discount = 0;
-      if (rawTotal >= 5000000) discount = rawTotal * 0.2;
-      else if (rawTotal >= 3000000) discount = rawTotal * 0.1;
+      if (rawTotal > 10000000 and rawTotal <= 15000000) discount = rawTotal * 0.05;
+      else if (rawTotal > 15000000 and rawTotal <= 20000000) discount = rawTotal * 0.10
+            else if (rawTotal > 20000000 and rawTotal <= 30000000) discount = rawTotal * 0.20
+                  else if (rawTotal > 30000000 and rawTotal <= 40000000) discount = rawTotal * 0.25
+                       else if (rawTotal <= 40000000) discount = rawTotal * 0.3;
 
       const finalTotal = rawTotal - discount;
 
