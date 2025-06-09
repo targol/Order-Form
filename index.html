@@ -78,22 +78,46 @@
       <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
     </div>
 
-     <div class="payment">
-      <strong>لطفاً مبلغ را به یکی از حساب‌های زیر واریز نمایید:</strong><br />
-      <p> هزینه ی ارسال به عهده ی مشتری است </p>
-    </div>
+    <style>
+  .account-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+  }
+  .account-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  .account-box strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
 
-     <div class="payment">
-      <strong>به نام نیما حکیمی نزد بانک ملی :</strong><br />
-      <p>💳 6037-9973-6870-4665 </p>
-      <p>💳 IR6301700000002232283580071 </p>
-    </div>
-  
-    <div class="payment">
-      <strong> به نام مهتاب فتاحی نزد بانک ...:</strong><br />
-      <p>💳 5041-7212-0097-2017 </p>
-      <p>💳 Ir420700010001110103791001 </p>
-    </div>
+<div class="payment">
+  <strong>لطفاً مبلغ را به یکی از حساب‌های زیر واریز نمایید:</strong>
+  <p>هزینه‌ی ارسال به عهده‌ی مشتری است.</p>
+</div>
+
+<div class="account-grid">
+  <div class="account-box">
+    <strong>به نام نیما حکیمی نزد بانک ملی:</strong>
+    <p>💳 6037-9973-6870-4665</p>
+    <p>💳 IR6301700000002232283580071</p>
+  </div>
+  <div class="account-box">
+    <strong>به نام مهتاب فتاحی نزد بانک ...:</strong>
+    <p>💳 5041-7212-0097-2017</p>
+    <p>💳 IR420700010001110103791001</p>
+  </div>
+</div>
+
 
     <form id="order-form" onsubmit="submitForm(event)">
     <label for="fullName">نام و نام خانوادگی:</label>
