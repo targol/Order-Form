@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>فرم سفارش ماگ</title>
+  <title>فرم سفارش از PerlaPots</title>
   <style>
     body { font-family: sans-serif; direction: rtl; padding: 20px; background: #f5f5f5; }
     h2 { text-align: center; }
@@ -18,14 +18,10 @@
   </style>
 </head>
 <body>
-  <h2>فرم سفارش ماگ</h2>
-
-  <form id="order-form" onsubmit="submitForm(event)">
-    <label for="fullName">نام و نام خانوادگی:</label>
-    <input type="text" id="fullName" name="fullName" required placeholder="مثلاً: علی رضایی">
-
-    <label for="phone">شماره تماس:</label>
-    <input type="tel" id="phone" name="phone" required placeholder="مثلاً: 09123456789" pattern="[0-9]{10,11}">
+  <h2>فرم سفارش از PerlaPots</h2>
+<div style="text-align: left; margin-bottom: 10px;">
+  <img src="https://github.com/targol/Order-Form/blob/main/Perlapots_Logotype-05.jpg" alt="لوگو" style="height: 50px;">
+</div>
 
     <table>
       <thead>
@@ -81,6 +77,13 @@
       <p>💳 6054-3211-1354-8915 - به نام ترگل</p>
     </div>
 
+    <form id="order-form" onsubmit="submitForm(event)">
+    <label for="fullName">نام و نام خانوادگی:</label>
+    <input type="text" id="fullName" name="fullName" required placeholder="مثلاً: علی رضایی">
+
+    <label for="phone">شماره تماس:</label>
+    <input type="tel" id="phone" name="phone" required placeholder="مثلاً: 09123456789" pattern="[0-9]{10,11}">
+      
     <div class="address">
       <label for="address">📍 آدرس ارسال:</label>
       <input type="text" id="address" name="address" required placeholder="مثلاً: تهران، بلوار..." />
