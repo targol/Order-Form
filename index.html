@@ -119,12 +119,33 @@
 </div>
 
 
-    <form id="order-form" onsubmit="submitForm(event)">
-    <label for="fullName">نام و نام خانوادگی:</label>
-    <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
+    <style>
+  #order-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 40px;
+    align-items: center;
+  }
+  #order-form label {
+    justify-self: end; /* لیبل‌ها سمت راست باشند */
+    font-weight: bold;
+  }
+  #order-form input[type="text"],
+  #order-form input[type="tel"] {
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+</style>
 
-    <label for="phone">شماره تماس:</label>
-    <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+<form id="order-form" onsubmit="submitForm(event)">
+  <label for="fullName">نام و نام خانوادگی:</label>
+  <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
+
+  <label for="phone">شماره تماس:</label>
+  <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+</form>
+
       
     <div class="address">
       <label for="address">📍 آدرس ارسال:</label>
