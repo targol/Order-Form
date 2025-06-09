@@ -120,12 +120,13 @@
         rawTotal += rowTotal;
       });
 
-      let discount = 0;
-      if (rawTotal > 10000000 and rawTotal <= 15000000) discount = rawTotal * 0.05;
-      else if (rawTotal > 15000000 and rawTotal <= 20000000) discount = rawTotal * 0.10
-            else if (rawTotal > 20000000 and rawTotal <= 30000000) discount = rawTotal * 0.20
-                  else if (rawTotal > 30000000 and rawTotal <= 40000000) discount = rawTotal * 0.25
-                       else if (rawTotal <= 40000000) discount = rawTotal * 0.3;
+     let discount = 0;
+     if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
+     else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
+          else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
+               else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
+                    else if (rawTotal > 40000000) discount = rawTotal * 0.3;
+                         else discount = 0;
 
       const finalTotal = rawTotal - discount;
 
