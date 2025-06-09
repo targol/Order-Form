@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -22,8 +23,7 @@
 <div style="text-align: left; margin-bottom: 10px;">
   <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
 </div>
-
-    <table>
+<table>
 <thead>
   <tr>
     <th>نام محصول</th>
@@ -47,7 +47,6 @@
     <td></td>
     <td class="row-total">0</td>
   </tr>
-
   <tr data-price="175000">
     <td>ماگ لاستر</td>
     <td>175000</td>
@@ -59,109 +58,47 @@
     <td class="row-total">0</td>
   </tr>
 </tbody>
-
- </table>
-
-    <div class="summary">
-      <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
-      <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
-      <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
-    </div>
-
-    <style>
-  .account-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-  }
-  .account-box {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 8px;
-    background: #fafafa;
-  }
-  .account-box strong {
-    display: block;
-    margin-bottom: 5px;
-  }
-</style>
-
-    <style>
-  #order-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px 40px;
-    align-items: center;
-  }
-  #order-form label {
-    justify-self: end; /* لیبل‌ها سمت راست باشند */
-    font-weight: bold;
-  }
-  #order-form input[type="text"],
-  #order-form input[type="tel"] {
-    width: 100%;
-    padding: 6px 8px;
-    box-sizing: border-box;
-  }
-</style>
-
+</table>
+<div class="summary">
+  <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
+  <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
+  <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
+</div>
 <form id="order-form" onsubmit="submitForm(event)">
   <label for="fullName">نام و نام خانوادگی:</label>
   <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
-
   <label for="phone">شماره تماس:</label>
   <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+  <label for="address">📍 آدرس ارسال:</label>
+  <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
+  <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
+  <div class="whatsapp">
+    <button class="btn btn-send" type="submit">ثبت سفارش</button>
+    <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
+  </div>
 </form>
-
-    <div class="address">
-      <label for="address">📍 آدرس ارسال:</label>
-      <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
-    </div>
-
-    <div>
-      <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
-    </div>
-
-    <div class="whatsapp">
-      <button class="btn btn-send" type="submit">ثبت سفارش</button>
-      <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
-    </div>
-  </form>
-
- <script>
+<script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
 
   function updateTotal() {
     const rows = document.querySelectorAll("#product-table tr");
     let rawTotal = 0;
-
     rows.forEach((row) => {
       const price = parseInt(row.dataset.price);
       const inputs = row.querySelectorAll('input[type="number"]');
       let rowQty = 0;
-
-      inputs.forEach((input) => {
-        rowQty += parseInt(input.value) || 0;
-      });
-
+      inputs.forEach((input) => { rowQty += parseInt(input.value) || 0; });
       const rowTotal = rowQty * price;
       row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
       rawTotal += rowTotal;
     });
-
     let discount = 0;
     if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
     else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
     else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
     else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
     else if (rawTotal > 40000000) discount = rawTotal * 0.30;
-
     const finalTotal = rawTotal - discount;
-
     document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
     document.getElementById("discount-amount").textContent = discount.toLocaleString();
     document.getElementById("final-total").textContent = finalTotal.toLocaleString();
@@ -178,40 +115,31 @@
 
   function submitForm(e) {
     e.preventDefault();
-
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const address = document.getElementById("address").value.trim();
-
     if (!fullName || !phone || !address) {
       alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
       return;
     }
-
     const rows = document.querySelectorAll("#product-table tr");
     const order = [];
-
     rows.forEach((row) => {
       const product = row.cells[0].textContent;
       const inputs = row.querySelectorAll('input[type="number"]');
       inputs.forEach((input) => {
         const qty = parseInt(input.value) || 0;
         const color = input.name.split("-")[1];
-        if (qty > 0) {
-          order.push(`${product} (${color}): ${qty}`);
-        }
+        if (qty > 0) order.push(`${product} (${color}): ${qty}`);
       });
     });
-
     if (order.length === 0) {
       alert("لطفاً حداقل یک محصول را انتخاب کنید.");
       return;
     }
-
     const raw = document.getElementById("raw-total").textContent;
     const discount = document.getElementById("discount-amount").textContent;
     const final = document.getElementById("final-total").textContent;
-
     const formData = new FormData();
     formData.append("نام و نام خانوادگی", fullName);
     formData.append("شماره تماس", phone);
@@ -220,7 +148,6 @@
     formData.append("تخفیف", discount);
     formData.append("مبلغ نهایی", final);
     formData.append("آدرس", address);
-
     fetch(scriptURL, { method: "POST", body: formData })
       .then(() => {
         if (document.getElementById("send-whatsapp").checked)
@@ -231,13 +158,21 @@
   }
 
   function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
-    let message = `سفارش:\nنام: ${fullName}\nشماره: ${phone}\n`;
-    message += order.map((x) => "- " + x).join("\n");
-    message += `\n\nجمع کل: ${raw} تومان`;
-    if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
-    message += `\nمبلغ نهایی: ${final} تومان`;
-    message += `\nآدرس: ${address}`;
+    let message = `سفارش:
+نام: ${fullName}
+شماره: ${phone}
+`;
+    message += order.map((x) => "- " + x).join("
+");
+    message += `
 
+جمع کل: ${raw} تومان`;
+    if (discount !== "0") message += `
+تخفیف: ${discount} تومان`;
+    message += `
+مبلغ نهایی: ${final} تومان`;
+    message += `
+آدرس: ${address}`;
     const phoneWA = "09361189022";
     const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
