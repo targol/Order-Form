@@ -20,49 +20,199 @@
 <body>
   <h2>فرم سفارش از PerlaPots</h2>
   <div style="text-align: left; margin-bottom: 10px;">
-    <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
-  </div>
-
+  <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
+</div>
+  
   <table>
-    <thead>
-      <tr>
-        <th>نام محصول</th>
-        <th>قیمت واحد (تومان)</th>
-        <th>Off white</th>
-        <th>Midnight blue</th>
-        <th>Evergreen</th>
-        <th>Sky steel</th>
-        <th>Golden Amber</th>
-        <th>Warm cream</th>
-        <th>جمع ردیف</th>
-      </tr>
-    </thead>
-    <tbody id="product-table">
-      <tr data-price="520000">
-        <td>بشقاب غذا خوری قطر ۲۵</td>
-        <td>520000</td>
-        <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
-        <td class="row-total">0</td>
-      </tr>
-      <tr data-price="298000">
-        <td>لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی</td>
-        <td>298000</td>
-        <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
-        <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
-        <td class="row-total">0</td>
-      </tr>
-    </tbody>
-  </table>
+<thead>
+  <tr>
+    <th>نام محصول</th>
+    <th>قیمت واحد (تومان)</th>
+    <th>Off white</th>
+    <th>Midnight blue</th>
+    <th>Evergreen</th>
+    <th>Sky steel</th>
+    <th>Golden Amber</th>
+    <th>Warm cream</th>
+    <th>جمع ردیف</th>
+  </tr>
+</thead>
+<tbody id="product-table">
+  <tr data-price="520000">
+    <td>بشقاب غذا خوری قطر ۲۵</td>
+    <td>520000</td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="298000">
+    <td>لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی</td>
+    <td>298000</td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+</tbody>
+</table>
 
-  <div class="summary">
-    <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
-    <strong>تخفیف:</strong> <span id="di
+<div class="summary">
+  <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
+  <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
+  <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
+</div>
+<style>
+  #order-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 40px;
+    align-items: center;
+  }
+  #order-form label {
+    justify-self: end; /* لیبل‌ها سمت راست باشند */
+    font-weight: bold;
+  }
+  #order-form input[type="text"],
+  #order-form input[type="tel"] {
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+</style>
+<form id="order-form" onsubmit="submitForm(event)">
+  <label for="fullName">نام و نام خانوادگی:</label>
+  <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
+
+  <label for="phone">شماره تماس:</label>
+  <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+</form>
+  <label for="address">📍 آدرس ارسال:</label>
+  <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
+  <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
+  <div class="whatsapp">
+    <button class="btn btn-send" type="submit">ثبت سفارش</button>
+    <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
+  </div>
+</form>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
+                     
+  function updateTotal() {
+    let totalPrice = 0;
+    const rows = document.querySelectorAll("tr[data-price]");
+
+    rows.forEach(row => {
+      const pricePerItem = parseInt(row.getAttribute('data-price')) || 0;
+      let rowQty = 0;
+      row.querySelectorAll("input[type='number']").forEach(input => {
+        rowQty += parseInt(input.value) || 0;
+      });
+      const rowTotal = rowQty * pricePerItem;
+      row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
+      totalPrice += rowTotal;
+    });
+
+    const rawTotal = totalPrice;
+    let discount = 0;
+    if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
+    else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
+    else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
+    else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
+    else if (rawTotal > 40000000) discount = rawTotal * 0.30;
+
+    const finalTotal = rawTotal - discount;
+
+    document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
+    document.getElementById("discount-amount").textContent = discount.toLocaleString();
+    document.getElementById("final-total").textContent = finalTotal.toLocaleString();
+  }
+
+  function clearForm() {
+    document.querySelectorAll("#product-table input[type='number']").forEach(i => i.value = 0);
+    document.getElementById("address").value = "";
+    document.getElementById("fullName").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("send-whatsapp").checked = false;
+    updateTotal();
+  }
+  let isSubmitting = false;  // متغیر برای پیگیری ارسال فرم
+  // ارسال سفارش به واتساپ پس از ثبت
+function submitForm(e) {
+    e.preventDefault();
+
+    if (isSubmitting) return; 
+    isSubmitting = true;
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!fullName || !phone || !address) {
+        alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
+        return;
+    }
+
+    const rawTotal = parseInt(document.getElementById("raw-total").textContent.replace(/,/g, ''));
+    const discount = parseInt(document.getElementById("discount-amount").textContent.replace(/,/g, ''));
+    const finalTotal = parseInt(document.getElementById("final-total").textContent.replace(/,/g, ''));
+
+    const order = [];
+    document.querySelectorAll("#product-table tr").forEach(row => {
+        const productName = row.querySelector("td:first-child").textContent;
+        const rowTotal = row.querySelector(".row-total").textContent;
+        order.push(`${productName}: ${rowTotal}`);
+    });
+
+    const formData = new FormData();
+    formData.append("name", fullName);
+    formData.append("phone", phone);
+    formData.append("productList", order.join(" | "));
+    formData.append("total", rawTotal);
+    formData.append("discount", discount);
+    formData.append("finalTotal", finalTotal);
+    formData.append("address", address);
+
+    // ارسال به گوگل اسکریپت
+    fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => response.text())
+        .then(data => {
+            alert('سفارش با موفقیت ثبت شد!');
+            // ارسال به واتساپ در صورت انتخاب
+            if (document.getElementById("send-whatsapp").checked) {
+                sendToWhatsApp(fullName, phone, order, rawTotal, discount, finalTotal, address);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('خطا در ارسال سفارش!');
+        });
+}
+
+  function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
+    let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n`;
+    message += order.map(x => "- " + x).join("\n");
+    message += `\n\nجمع کل: ${raw} تومان`;
+    if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
+    message += `\nمبلغ نهایی: ${final} تومان`;
+    message += `\nآدرس: ${address}`;
+
+    const phoneWA = "09361189022";
+    const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  }
+
+  document.getElementById("order-form").addEventListener("submit", submitForm);
+  document.querySelector(".btn-clear").addEventListener("click", clearForm);
+
+  updateTotal();
+</script>
+
+</body>
+</html>
