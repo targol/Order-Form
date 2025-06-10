@@ -290,11 +290,31 @@
   <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
   <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
 </div>
+<style>
+  #order-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 40px;
+    align-items: center;
+  }
+  #order-form label {
+    justify-self: end; /* لیبل‌ها سمت راست باشند */
+    font-weight: bold;
+  }
+  #order-form input[type="text"],
+  #order-form input[type="tel"] {
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+</style>
 <form id="order-form" onsubmit="submitForm(event)">
   <label for="fullName">نام و نام خانوادگی:</label>
   <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
+
   <label for="phone">شماره تماس:</label>
   <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+</form>
   <label for="address">📍 آدرس ارسال:</label>
   <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
   <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
