@@ -413,6 +413,8 @@ summaryDiv.style.display = "block";
 
 if (document.getElementById("send-whatsapp").checked)
           sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
+  openOrderSummaryPage(fullName, phone, address, order, raw, discount, final);
+
         else {
           alert("سفارش با موفقیت ثبت شد ✅");
           clearForm();
@@ -446,6 +448,53 @@ if (document.getElementById("send-whatsapp").checked)
     link.href = canvas.toDataURL();
     link.click();
   });
+}
+
+
+  function openOrderSummaryPage(fullName, phone, address, order, raw, discount, final) {
+  const summaryHTML = `
+    <html dir="rtl">
+    <head>
+      <title>خلاصه سفارش</title>
+      <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+      <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.8; }
+        .summary-box { border: 1px solid #ccc; padding: 20px; max-width: 600px; margin: auto; }
+        ul { padding-right: 20px; }
+        button { margin-top: 20px; padding: 10px 20px; }
+      </style>
+    </head>
+    <body>
+      <div class="summary-box" id="summary-content">
+        <h2>خلاصه سفارش</h2>
+        <p><strong>نام:</strong> ${fullName}</p>
+        <p><strong>شماره:</strong> ${phone}</p>
+        <p><strong>آدرس:</strong> ${address}</p>
+        <p><strong>محصولات:</strong></p>
+        <ul>${order.map(item => `<li>${item}</li>`).join('')}</ul>
+        <p><strong>جمع کل:</strong> ${raw} تومان</p>
+        <p><strong>تخفیف:</strong> ${discount} تومان</p>
+        <p><strong>مبلغ نهایی:</strong> ${final} تومان</p>
+        <button onclick="saveAsImage()">📸 ذخیره تصویر سفارش</button>
+      </div>
+
+      <script>
+        function saveAsImage() {
+          html2canvas(document.getElementById('summary-content')).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'سفارش.png';
+            link.href = canvas.toDataURL();
+            link.click();
+          });
+        }
+      </script>
+    </body>
+    </html>
+  `;
+
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(summaryHTML);
+  newWindow.document.close();
 }
 
 </script>
