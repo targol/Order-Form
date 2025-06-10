@@ -344,9 +344,13 @@
     document.getElementById("send-whatsapp").checked = false;
     updateTotal();
   }
-
+  let isSubmitting = false;  // متغیر برای پیگیری ارسال فرم
   function submitForm(e) {
     e.preventDefault();
+
+    if (isSubmitting) return; // اگر در حال ارسال است، از ارسال دوباره جلوگیری کن
+    isSubmitting = true;  // تغییر وضعیت ارسال به true
+    
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const address = document.getElementById("address").value.trim();
