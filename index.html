@@ -16,13 +16,13 @@
     .btn-send { background: #2ecc71; color: white; }
     label { display: block; margin-top: 10px; font-weight: bold; }
   </style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
   <h2>فرم سفارش از PerlaPots</h2>
   <div style="text-align: left; margin-bottom: 10px;">
-  <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
-</div>
- <table>
+    <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
+  </div><table>
 <thead>
   <tr>
     <th>نام محصول</th>
@@ -168,7 +168,17 @@
     <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
     <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
     <td class="row-total">0</td>
-   </tr><tr data-price="180000">
+  </tr><tr data-price="350000">
+    <td>بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵</td>
+    <td>350000</td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="180000">
     <td>ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲</td>
     <td>180000</td>
     <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Off white" min="0" value="0" onchange="updateTotal()" /></td>
@@ -279,31 +289,11 @@
   <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
   <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
 </div>
-<style>
-  #order-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px 40px;
-    align-items: center;
-  }
-  #order-form label {
-    justify-self: end; /* لیبل‌ها سمت راست باشند */
-    font-weight: bold;
-  }
-  #order-form input[type="text"],
-  #order-form input[type="tel"] {
-    width: 100%;
-    padding: 6px 8px;
-    box-sizing: border-box;
-  }
-</style>
 <form id="order-form" onsubmit="submitForm(event)">
   <label for="fullName">نام و نام خانوادگی:</label>
   <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
-
   <label for="phone">شماره تماس:</label>
   <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
-</form>
   <label for="address">📍 آدرس ارسال:</label>
   <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
   <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
@@ -312,9 +302,15 @@
     <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
   </div>
 </form>
+  <div id="order-summary" style="display:none; border: 1px solid #ccc; margin-top: 20px; padding: 15px;">
+  <h3>خلاصه سفارش</h3>
+  <div id="summary-content"></div>
+  <button onclick="saveSummaryImage()">📸 ذخیره تصویر سفارش</button>
+</div>
+
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
-                     
+
   function updateTotal() {
     let totalPrice = 0;
     const rows = document.querySelectorAll("tr[data-price]");
@@ -353,58 +349,77 @@
     document.getElementById("send-whatsapp").checked = false;
     updateTotal();
   }
-  let isSubmitting = false;  // متغیر برای پیگیری ارسال فرم
-  // ارسال سفارش به واتساپ پس از ثبت
-function submitForm(e) {
-    e.preventDefault();
 
-  <!--  if (isSubmitting) return; 
-    isSubmitting = true;
--->
+  function submitForm(e) {
+    e.preventDefault();
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const address = document.getElementById("address").value.trim();
 
     if (!fullName || !phone || !address) {
-        alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
-        return;
+      alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
+      return;
     }
 
-    const rawTotal = parseInt(document.getElementById("raw-total").textContent.replace(/,/g, ''));
-    const discount = parseInt(document.getElementById("discount-amount").textContent.replace(/,/g, ''));
-    const finalTotal = parseInt(document.getElementById("final-total").textContent.replace(/,/g, ''));
-
     const order = [];
-    document.querySelectorAll("#product-table tr").forEach(row => {
-        const productName = row.querySelector("td:first-child").textContent;
-        const rowTotal = row.querySelector(".row-total").textContent;
-        order.push(`${productName}: ${rowTotal}`);
+    document.querySelectorAll("#product-table tr[data-price]").forEach(row => {
+      const product = row.cells[0].textContent;
+      row.querySelectorAll("input[type='number']").forEach(input => {
+        const qty = parseInt(input.value) || 0;
+        if (qty > 0) {
+          const color = input.name.split("-").pop().trim();
+          order.push(`${product} (${color}): ${qty}`);
+        }
+      });
     });
 
-    const formData = new FormData();
-    formData.append("name", fullName);
-    formData.append("phone", phone);
-    formData.append("productList", order.join(" | "));
-    formData.append("total", rawTotal);
-    formData.append("discount", discount);
-    formData.append("finalTotal", finalTotal);
-    formData.append("address", address);
+    if (order.length === 0) {
+      alert("لطفاً حداقل یک محصول را انتخاب کنید.");
+      return;
+    }
 
-    // ارسال به گوگل اسکریپت
-    fetch(scriptURL, { method: 'POST', body: formData })
-        .then(response => response.text())
-        .then(data => {
-            alert('سفارش با موفقیت ثبت شد!');
-            // ارسال به واتساپ در صورت انتخاب
-            if (document.getElementById("send-whatsapp").checked) {
-                sendToWhatsApp(fullName, phone, order, rawTotal, discount, finalTotal, address);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('خطا در ارسال سفارش!');
-        });
-}
+    const raw = document.getElementById("raw-total").textContent;
+    const discount = document.getElementById("discount-amount").textContent;
+    const final = document.getElementById("final-total").textContent;
+
+    const formData = new FormData();
+    formData.append("نام و نام خانوادگی", fullName);
+    formData.append("شماره تماس", phone);
+    formData.append("محصولات", order.join(" | "));
+    formData.append("جمع کل", raw);
+    formData.append("تخفیف", discount);
+    formData.append("مبلغ نهایی", final);
+    formData.append("آدرس", address);
+
+    fetch(scriptURL, { method: "POST", body: formData })
+      .then(() => {
+        // نمایش خلاصه سفارش
+const summaryDiv = document.getElementById("order-summary");
+const contentDiv = document.getElementById("summary-content");
+let summaryHTML = `
+  <p><strong>نام:</strong> ${fullName}</p>
+  <p><strong>شماره:</strong> ${phone}</p>
+  <p><strong>آدرس:</strong> ${address}</p>
+  <p><strong>محصولات:</strong></p>
+  <ul>
+    ${order.map(x => `<li>${x}</li>`).join("")}
+  </ul>
+  <p><strong>جمع کل:</strong> ${raw} تومان</p>
+  <p><strong>تخفیف:</strong> ${discount} تومان</p>
+  <p><strong>مبلغ نهایی:</strong> ${final} تومان</p>
+`;
+contentDiv.innerHTML = summaryHTML;
+summaryDiv.style.display = "block";
+
+if (document.getElementById("send-whatsapp").checked)
+          sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
+        else {
+          alert("سفارش با موفقیت ثبت شد ✅");
+          clearForm();
+        }
+      })
+      .catch(() => alert("خطا در ثبت سفارش ❌"));
+  }
 
   function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
     let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n`;
@@ -423,6 +438,16 @@ function submitForm(e) {
   document.querySelector(".btn-clear").addEventListener("click", clearForm);
 
   updateTotal();
+  function saveSummaryImage() {
+  const target = document.getElementById("order-summary");
+  html2canvas(target).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "سفارش.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
 </script>
 
 </body>
