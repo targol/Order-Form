@@ -16,6 +16,7 @@
     .btn-send { background: #2ecc71; color: white; }
     label { display: block; margin-top: 10px; font-weight: bold; }
   </style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
   <h2>فرم سفارش از PerlaPots</h2>
@@ -301,6 +302,12 @@
     <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
   </div>
 </form>
+  <div id="order-summary" style="display:none; border: 1px solid #ccc; margin-top: 20px; padding: 15px;">
+  <h3>خلاصه سفارش</h3>
+  <div id="summary-content"></div>
+  <button onclick="saveSummaryImage()">📸 ذخیره تصویر سفارش</button>
+</div>
+
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
 
@@ -386,7 +393,25 @@
 
     fetch(scriptURL, { method: "POST", body: formData })
       .then(() => {
-        if (document.getElementById("send-whatsapp").checked)
+        // نمایش خلاصه سفارش
+const summaryDiv = document.getElementById("order-summary");
+const contentDiv = document.getElementById("summary-content");
+let summaryHTML = `
+  <p><strong>نام:</strong> ${fullName}</p>
+  <p><strong>شماره:</strong> ${phone}</p>
+  <p><strong>آدرس:</strong> ${address}</p>
+  <p><strong>محصولات:</strong></p>
+  <ul>
+    ${order.map(x => `<li>${x}</li>`).join("")}
+  </ul>
+  <p><strong>جمع کل:</strong> ${raw} تومان</p>
+  <p><strong>تخفیف:</strong> ${discount} تومان</p>
+  <p><strong>مبلغ نهایی:</strong> ${final} تومان</p>
+`;
+contentDiv.innerHTML = summaryHTML;
+summaryDiv.style.display = "block";
+
+if (document.getElementById("send-whatsapp").checked)
           sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
         else {
           alert("سفارش با موفقیت ثبت شد ✅");
@@ -413,6 +438,16 @@
   document.querySelector(".btn-clear").addEventListener("click", clearForm);
 
   updateTotal();
+  function saveSummaryImage() {
+  const target = document.getElementById("order-summary");
+  html2canvas(target).then(canvas => {
+    const link = document.createElement("a");
+    link.download = "سفارش.png";
+    link.href = canvas.toDataURL();
+    link.click();
+  });
+}
+
 </script>
 
 </body>
