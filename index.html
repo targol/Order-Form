@@ -20,24 +20,25 @@
 <body>
   <h2>فرم سفارش از PerlaPots</h2>
   <div style="text-align: left; margin-bottom: 10px;">
-  <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
-</div>
+    <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
+  </div>
   
   <table>
-<thead>
-  <tr>
-    <th>نام محصول</th>
-    <th>قیمت واحد (تومان)</th>
-    <th>Off white</th>
-    <th>Midnight blue</th>
-    <th>Evergreen</th>
-    <th>Sky steel</th>
-    <th>Golden Amber</th>
-    <th>Warm cream</th>
-    <th>جمع ردیف</th>
-  </tr>
-</thead>
-<tbody id="product-table">
+    <thead>
+      <tr>
+        <th>نام محصول</th>
+        <th>قیمت واحد (تومان)</th>
+        <th>Off white</th>
+        <th>Midnight blue</th>
+        <th>Evergreen</th>
+        <th>Sky steel</th>
+        <th>Golden Amber</th>
+        <th>Warm cream</th>
+        <th>جمع ردیف</th>
+      </tr>
+    </thead>
+    <tbody id="product-table">
+      <tbody id="product-table">
   <tr data-price="520000">
     <td>بشقاب غذا خوری قطر ۲۵</td>
     <td>520000</td>
@@ -273,156 +274,217 @@
     <td class="row-total">0</td>
   </tr>
 </tbody>
-</table>
+  </table>
 
-<div class="summary">
-  <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
-  <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
-  <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
-</div>
-<style>
-  #order-form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px 40px;
-    align-items: center;
-  }
-  #order-form label {
-    justify-self: end; /* لیبل‌ها سمت راست باشند */
-    font-weight: bold;
-  }
-  #order-form input[type="text"],
-  #order-form input[type="tel"] {
-    width: 100%;
-    padding: 6px 8px;
-    box-sizing: border-box;
-  }
-</style>
-<form id="order-form" onsubmit="submitForm(event)">
-  <label for="fullName">نام و نام خانوادگی:</label>
-  <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
-
-  <label for="phone">شماره تماس:</label>
-  <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
-</form>
-  <label for="address">📍 آدرس ارسال:</label>
-  <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
-  <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
-  <div class="whatsapp">
-    <button class="btn btn-send" type="submit">ثبت سفارش</button>
-    <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
+  <div class="summary">
+    <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
+    <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
+    <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
   </div>
-</form>
-<script>
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
+  
+  <form id="order-form" onsubmit="submitForm(event)">
+    <label for="fullName">نام و نام خانوادگی:</label>
+    <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
+    <label for="phone">شماره تماس:</label>
+    <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+    <label for="address">📍 آدرس ارسال:</label>
+    <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
+    <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
+    <div class="whatsapp">
+      <button class="btn btn-send" type="submit">ثبت سفارش</button>
+      <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
+    </div>
+  </form>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
                      
-  function updateTotal() {
-    let totalPrice = 0;
-    const rows = document.querySelectorAll("tr[data-price]");
+    function updateTotal() {
+      let totalPrice = 0;
+      const rows = document.querySelectorAll("tr[data-price]");
 
-    rows.forEach(row => {
-      const pricePerItem = parseInt(row.getAttribute('data-price')) || 0;
-      let rowQty = 0;
-      row.querySelectorAll("input[type='number']").forEach(input => {
-        rowQty += parseInt(input.value) || 0;
+      rows.forEach(row => {
+        const pricePerItem = parseInt(row.getAttribute('data-price')) || 0;
+        let rowQty = 0;
+        row.querySelectorAll("input[type='number']").forEach(input => {
+          rowQty += parseInt(input.value) || 0;
+        });
+        const rowTotal = rowQty * pricePerItem;
+        row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
+        totalPrice += rowTotal;
       });
-      const rowTotal = rowQty * pricePerItem;
-      row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
-      totalPrice += rowTotal;
-    });
 
-    const rawTotal = totalPrice;
-    let discount = 0;
-    if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
-    else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
-    else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
-    else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
-    else if (rawTotal > 40000000) discount = rawTotal * 0.30;
+      const rawTotal = totalPrice;
+      let discount = 0;
+      if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
+      else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
+      else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
+      else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
+      else if (rawTotal > 40000000) discount = rawTotal * 0.30;
 
-    const finalTotal = rawTotal - discount;
+      const finalTotal = rawTotal - discount;
 
-    document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
-    document.getElementById("discount-amount").textContent = discount.toLocaleString();
-    document.getElementById("final-total").textContent = finalTotal.toLocaleString();
-  }
-
-  function clearForm() {
-    document.querySelectorAll("#product-table input[type='number']").forEach(i => i.value = 0);
-    document.getElementById("address").value = "";
-    document.getElementById("fullName").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("send-whatsapp").checked = false;
-    updateTotal();
-  }
-  let isSubmitting = false;  // متغیر برای پیگیری ارسال فرم
-  function submitForm(e) {
-    e.preventDefault();
-
-    if (isSubmitting) return; // اگر در حال ارسال است، از ارسال دوباره جلوگیری کن
-    isSubmitting = true;  // تغییر وضعیت ارسال به true
-    
-    const fullName = document.getElementById("fullName").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
-
-    if (!fullName || !phone || !address) {
-      alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
-      return;
+      document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
+      document.getElementById("discount-amount").textContent = discount.toLocaleString();
+      document.getElementById("final-total").textContent = finalTotal.toLocaleString();
     }
 
-    
-  const formData = new FormData();
-  formData.append("name", fullName);
-  formData.append("phone", phone);
-  formData.append("productList", order.join(" | "));
-  formData.append("color1", document.querySelector('[name="color1"]').value);
-  formData.append("color2", document.querySelector('[name="color2"]').value);
-  formData.append("color3", document.querySelector('[name="color3"]').value);
-  formData.append("color4", document.querySelector('[name="color4"]').value);
-  formData.append("color5", document.querySelector('[name="color5"]').value);
-  formData.append("color6", document.querySelector('[name="color6"]').value);
-  formData.append("total", raw);
-  formData.append("discount", discount);
-  formData.append("lasttotal", final);
-  formData.append("add", address);
+    function clearForm() {
+      document.querySelectorAll("#product-table input[type='number']").forEach(i => i.value = 0);
+      document.getElementById("address").value = "";
+      document.getElementById("fullName").value = "";
+      document.getElementById("phone").value = "";
+      document.getElementById("send-whatsapp").checked = false;
+      updateTotal();
+    }
 
-  // ارسال درخواست POST به اسکریپت گوگل
-  fetch('https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec', {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => response.text())
-  .then(data => {
-    console.log('Success:', data);
-    alert('سفارش با موفقیت ثبت شد!');
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('خطا در ارسال سفارش!');
-  });
-}
+    function submitForm(e) {
+      e.preventDefault();
+      const fullName = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const rawTotal = parseInt(document.getElementById("raw-total").textContent.replace(/,/g, ''));
+      const discount = parseInt(document.getElementById("discount-amount").textContent.replace(/,/g, ''));
+      const finalTotal = parseInt(document.getElementById("final-total").textContent.replace(/,/g, ''));
 
+      // جمع‌آوری محصولات سفارش داده شده
+      let orderItems = [];
+      document.querySelectorAll("tr[data-price]").forEach(row => {
+        const productName = row.querySelector("td:first-child").textContent.trim();
+        row.querySelectorAll("input[type='number']").forEach((input, index) => {
+          const qty = parseInt(input.value) || 0;
+          if (qty > 0) {
+            const colors = ["Off white", "Midnight blue", "Evergreen", "Sky steel", "Golden Amber", "Warm cream"];
+            orderItems.push(`${productName} - ${colors[index]}: ${qty} عدد`);
+          }
+        });
+      });
 
+      if (orderItems.length === 0) {
+        alert("لطفاً حداقل یک محصول انتخاب کنید.");
+        return;
+      }
+      
+      // نمایش سفارش در صفحه جدید
+      showOrderSummary(fullName, phone, address, orderItems, rawTotal, discount, finalTotal);
+      
+      // ارسال به گوگل شیٹ
+      sendToGoogleSheet(fullName, phone, address, orderItems, rawTotal, discount, finalTotal);
+    }
 
+    function showOrderSummary(fullName, phone, address, orderItems, rawTotal, discount, finalTotal) {
+      // ایجاد صفحه جدید
+      const newWindow = window.open('', '_blank');
+      
+      // محتوای HTML برای صفحه سفارش
+      const orderHTML = `
+        <!DOCTYPE html>
+        <html lang="fa">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>سفارش شما - PerlaPots</title>
+          <style>
+            body { font-family: calibri; direction: rtl; padding: 20px; background: #f5f5f5; }
+            .order-summary { background: white; padding: 20px; border-radius: 8px; max-width: 600px; margin: 0 auto; }
+            h1 { text-align: center; color: #2ecc71; }
+            .order-details { margin-top: 20px; }
+            .order-item { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+            .total-section { margin-top: 20px; font-weight: bold; }
+            .btn { display: inline-block; padding: 10px 20px; margin-top: 20px; background: #2ecc71; 
+                   color: white; text-decoration: none; border-radius: 5px; cursor: pointer; }
+          </style>
+        </head>
+        <body>
+          <div class="order-summary">
+            <h1>سفارش شما با موفقیت ثبت شد</h1>
+            <div class="order-details">
+              <p><strong>نام:</strong> ${fullName}</p>
+              <p><strong>شماره تماس:</strong> ${phone}</p>
+              <p><strong>آدرس:</strong> ${address}</p>
+              
+              <h3>جزئیات سفارش:</h3>
+              ${orderItems.map(item => `<div class="order-item">${item}</div>`).join('')}
+              
+              <div class="total-section">
+                <p>جمع کل: ${rawTotal.toLocaleString()} تومان</p>
+                ${discount > 0 ? `<p>تخفیف: ${discount.toLocaleString()} تومان</p>` : ''}
+                <p>مبلغ نهایی: ${finalTotal.toLocaleString()} تومان</p>
+              </div>
+            </div>
+            <button id="save-as-image" class="btn">ذخیره به عنوان عکس</button>
+            <button id="print-order" class="btn" style="margin-right: 10px;">چاپ سفارش</button>
+          </div>
+          <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+          <script>
+            document.getElementById('save-as-image').addEventListener('click', function() {
+              html2canvas(document.querySelector('.order-summary')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'سفارش-PerlaPots.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+              });
+            });
+            
+            document.getElementById('print-order').addEventListener('click', function() {
+              window.print();
+            });
+          </script>
+        </body>
+        </html>
+      `;
+      
+      newWindow.document.write(orderHTML);
+      newWindow.document.close();
 
-  function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
-    let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n`;
-    message += order.map(x => "- " + x).join("\n");
-    message += `\n\nجمع کل: ${raw} تومان`;
-    if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
-    message += `\nمبلغ نهایی: ${final} تومان`;
-    message += `\nآدرس: ${address}`;
+      // ارسال به واتساپ اگر انتخاب شده باشد
+      if (document.getElementById("send-whatsapp").checked) {
+        sendToWhatsApp(fullName, phone, orderItems, rawTotal.toLocaleString(), 
+                      discount.toLocaleString(), finalTotal.toLocaleString(), address);
+      }
+    }
 
-    const phoneWA = "09361189022";
-    const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  }
+    function sendToGoogleSheet(fullName, phone, address, orderItems, rawTotal, discount, finalTotal) {
+      const formData = new FormData();
+      formData.append("name", fullName);
+      formData.append("phone", phone);
+      formData.append("productList", orderItems.join(" | "));
+      formData.append("total", rawTotal);
+      formData.append("discount", discount);
+      formData.append("lasttotal", finalTotal);
+      formData.append("add", address);
 
-  document.getElementById("order-form").addEventListener("submit", submitForm);
-  document.querySelector(".btn-clear").addEventListener("click", clearForm);
+      // ارسال درخواست POST به اسکریپت گوگل
+      fetch(scriptURL, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
 
-  updateTotal();
-</script>
+    function sendToWhatsApp(fullName, phone, orderItems, raw, discount, final, address) {
+      let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n\n`;
+      message += `محصولات:\n${orderItems.join('\n')}`;
+      message += `\n\nجمع کل: ${raw} تومان`;
+      if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
+      message += `\nمبلغ نهایی: ${final} تومان`;
+      message += `\nآدرس: ${address}`;
 
+      const phoneWA = "09361189022";
+      const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    document.getElementById("order-form").addEventListener("submit", submitForm);
+    document.querySelector(".btn-clear").addEventListener("click", clearForm);
+
+    updateTotal();
+  </script>
 </body>
 </html>
