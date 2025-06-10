@@ -274,7 +274,6 @@
 </tbody>
 </table>
 
-
 <div class="summary">
   <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
   <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
@@ -359,9 +358,9 @@
 function submitForm(e) {
     e.preventDefault();
 
-    if (isSubmitting) return; 
+  <!--  if (isSubmitting) return; 
     isSubmitting = true;
-
+-->
     const fullName = document.getElementById("fullName").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const address = document.getElementById("address").value.trim();
