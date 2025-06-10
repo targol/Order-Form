@@ -353,47 +353,40 @@
       return;
     }
 
-    const order = [];
-    document.querySelectorAll("#product-table tr[data-price]").forEach(row => {
-      const product = row.cells[0].textContent;
-      row.querySelectorAll("input[type='number']").forEach(input => {
-        const qty = parseInt(input.value) || 0;
-        if (qty > 0) {
-          const color = input.name.split("-").pop().trim();
-          order.push(`${product} (${color}): ${qty}`);
-        }
-      });
-    });
+    
+  const formData = new FormData();
+  formData.append("name", fullName);
+  formData.append("phone", phone);
+  formData.append("productList", order.join(" | "));
+  formData.append("color1", document.querySelector('[name="color1"]').value);
+  formData.append("color2", document.querySelector('[name="color2"]').value);
+  formData.append("color3", document.querySelector('[name="color3"]').value);
+  formData.append("color4", document.querySelector('[name="color4"]').value);
+  formData.append("color5", document.querySelector('[name="color5"]').value);
+  formData.append("color6", document.querySelector('[name="color6"]').value);
+  formData.append("total", raw);
+  formData.append("discount", discount);
+  formData.append("lasttotal", final);
+  formData.append("add", address);
 
-    if (order.length === 0) {
-      alert("لطفاً حداقل یک محصول را انتخاب کنید.");
-      return;
-    }
+  // ارسال درخواست POST به اسکریپت گوگل
+  fetch('https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log('Success:', data);
+    alert('سفارش با موفقیت ثبت شد!');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('خطا در ارسال سفارش!');
+  });
+}
 
-    const raw = document.getElementById("raw-total").textContent;
-    const discount = document.getElementById("discount-amount").textContent;
-    const final = document.getElementById("final-total").textContent;
 
-    const formData = new FormData();
-    formData.append("نام و نام خانوادگی", fullName);
-    formData.append("شماره تماس", phone);
-    formData.append("محصولات", order.join(" | "));
-    formData.append("جمع کل", raw);
-    formData.append("تخفیف", discount);
-    formData.append("مبلغ نهایی", final);
-    formData.append("آدرس", address);
 
-    fetch(scriptURL, { method: "POST", body: formData })
-      .then(() => {
-        if (document.getElementById("send-whatsapp").checked)
-          sendToWhatsApp(fullName, phone, order, raw, discount, final, address);
-        else {
-          alert("سفارش با موفقیت ثبت شد ✅");
-          clearForm();
-        }
-      })
-      .catch(() => alert("خطا در ثبت سفارش ❌"));
-  }
 
   function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
     let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n`;
