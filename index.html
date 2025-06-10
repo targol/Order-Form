@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>فرم سفارش از PerlaPots</title>
+  <style>
+    body { font-family: calibri; direction: rtl; padding: 20px; background: #f5f5f5; }
+    h2 { text-align: center; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    input[type="number"], input[type="text"], input[type="tel"] { width: 100%; padding: 5px; box-sizing: border-box; }
+    .summary, .payment, .whatsapp { background: #fff; padding: 15px; border-radius: 8px; margin-top: 15px; }
+    .btn { padding: 10px 20px; margin-top: 10px; cursor: pointer; border: none; border-radius: 5px; }
+    .btn-clear { background: #e74c3c; color: white; }
+    .btn-send { background: #2ecc71; color: white; }
+    label { display: block; margin-top: 10px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>فرم سفارش از PerlaPots</h2>
+  <div style="text-align: left; margin-bottom: 10px;">
+  <img src="./Perlapots_Logo.jpg" alt="لوگو" style="height: 50px;">
+</div>
+  
+  <table>
+<thead>
+  <tr>
+    <th>نام محصول</th>
+    <th>قیمت واحد (تومان)</th>
+    <th>Off white</th>
+    <th>Midnight blue</th>
+    <th>Evergreen</th>
+    <th>Sky steel</th>
+    <th>Golden Amber</th>
+    <th>Warm cream</th>
+    <th>جمع ردیف</th>
+  </tr>
+</thead>
+<tbody id="product-table">
+  <tr data-price="520000">
+    <td>بشقاب غذا خوری قطر ۲۵</td>
+    <td>520000</td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب غذا خوری قطر ۲۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="335000">
+    <td>پیش دستی قطر ۱۸ </td>
+    <td>335000</td>
+    <td><input type="number" name="پیش دستی قطر ۱۸ -Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیش دستی قطر ۱۸ -Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیش دستی قطر ۱۸ -Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیش دستی قطر ۱۸ -Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیش دستی قطر ۱۸ -Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیش دستی قطر ۱۸ -Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="450000">
+    <td>بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا</td>
+    <td>450000</td>
+    <td><input type="number" name="بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب گود قطر ۲۱ مناسب خورشت یا پاستا-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="880000">
+    <td>دیس بیضی بزرگ مناسب برنج</td>
+    <td>880000</td>
+    <td><input type="number" name="دیس بیضی بزرگ مناسب برنج-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="دیس بیضی بزرگ مناسب برنج-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="دیس بیضی بزرگ مناسب برنج-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="دیس بیضی بزرگ مناسب برنج-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="دیس بیضی بزرگ مناسب برنج-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="دیس بیضی بزرگ مناسب برنج-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+ <tr data-price="410000">
+    <td>ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی</td>
+    <td>410000</td>
+    <td><input type="number" name="ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ظرف بیضی طول ۲۹ عرض ۱۶ مناسب پذیرایی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+   <tr data-price="530000">
+    <td>کاسه سالاد قطر ۲۱ ارتفاع ۶.۵</td>
+    <td>530000</td>
+    <td><input type="number" name="کاسه سالاد قطر ۲۱ ارتفاع ۶.۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سالاد قطر ۲۱ ارتفاع ۶.۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سالاد قطر ۲۱ ارتفاع ۶.۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سالاد قطر ۲۱ ارتفاع ۶.۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سالاد قطر ۲۱ ارتفاع ۶.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سالاد قطر ۲۱ ارتفاع ۶.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="440000">
+    <td>کاسه روزانه قطر ۱۶ ارتفاع ۶</td>
+    <td>440000</td>
+    <td><input type="number" name="کاسه روزانه قطر ۱۶ ارتفاع ۶-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه روزانه قطر ۱۶ ارتفاع ۶-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه روزانه قطر ۱۶ ارتفاع ۶-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه روزانه قطر ۱۶ ارتفاع ۶-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه روزانه قطر ۱۶ ارتفاع ۶-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه روزانه قطر ۱۶ ارتفاع ۶-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="300000">
+    <td>کاسه سوپ قطر ۱۲ ارتفاع ۵.۵</td>
+    <td>300000</td>
+    <td><input type="number" name="کاسه سوپ قطر ۱۲ ارتفاع ۵.۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سوپ قطر ۱۲ ارتفاع ۵.۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سوپ قطر ۱۲ ارتفاع ۵.۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سوپ قطر ۱۲ ارتفاع ۵.۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سوپ قطر ۱۲ ارتفاع ۵.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه سوپ قطر ۱۲ ارتفاع ۵.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="280000">
+    <td>کاسه ماست قطر ۱۰ ارتفاع ۵</td>
+    <td>280000</td>
+    <td><input type="number" name="کاسه ماست قطر ۱۰ ارتفاع ۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه ماست قطر ۱۰ ارتفاع ۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه ماست قطر ۱۰ ارتفاع ۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه ماست قطر ۱۰ ارتفاع ۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه ماست قطر ۱۰ ارتفاع ۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه ماست قطر ۱۰ ارتفاع ۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="190000">
+    <td>پیاله کوچک قطر ۸ مناسب زیتون یا ترشی</td>
+    <td>190000</td>
+    <td><input type="number" name="پیاله کوچک قطر ۸ مناسب زیتون یا ترشی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیاله کوچک قطر ۸ مناسب زیتون یا ترشی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیاله کوچک قطر ۸ مناسب زیتون یا ترشی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیاله کوچک قطر ۸ مناسب زیتون یا ترشی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیاله کوچک قطر ۸ مناسب زیتون یا ترشی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="پیاله کوچک قطر ۸ مناسب زیتون یا ترشی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+   <tr data-price="250000">
+    <td>کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳</td>
+    <td>250000</td>
+    <td><input type="number" name="کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاسه بیضی دفرمه طول ۱۶ عرض ۱۰ ارتفاع ۳-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="350000">
+    <td>بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵</td>
+    <td>350000</td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="بشقاب تخت بیضی دفرمه طول ۲۴ عرض ۱۶.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+   </tr><tr data-price="180000">
+    <td>ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲</td>
+    <td>180000</td>
+    <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ساید بیضی طول ۱۴.۵ عرض ۷.۵ ارتفاع ۲-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="175000">
+    <td>سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ </td>
+    <td>175000</td>
+    <td><input type="number" name="سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ -Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ -Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ -Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ -Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ -Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="سس خوری کوچک قطر ۶.۵ ارتفاع ۴.۵ -Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="190000">
+    <td>مینی کریمر قطر ۵.۵ ارتفاع ۷</td>
+    <td>190000</td>
+    <td><input type="number" name="مینی کریمر قطر ۵.۵ ارتفاع ۷-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="مینی کریمر قطر ۵.۵ ارتفاع ۷-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="مینی کریمر قطر ۵.۵ ارتفاع ۷-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="مینی کریمر قطر ۵.۵ ارتفاع ۷-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="مینی کریمر قطر ۵.۵ ارتفاع ۷-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="مینی کریمر قطر ۵.۵ ارتفاع ۷-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="550000">
+    <td>کاپ لاته به همراه رست ۳۴۰ سی سی</td>
+    <td>550000</td>
+    <td><input type="number" name="کاپ لاته به همراه رست ۳۴۰ سی سی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ لاته به همراه رست ۳۴۰ سی سی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ لاته به همراه رست ۳۴۰ سی سی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ لاته به همراه رست ۳۴۰ سی سی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ لاته به همراه رست ۳۴۰ سی سی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ لاته به همراه رست ۳۴۰ سی سی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="460000">
+    <td>کاپ کاپوچینو به همراه رست ۲۲۰ سی سی</td>
+    <td>460000</td>
+    <td><input type="number" name="کاپ کاپوچینو به همراه رست ۲۲۰ سی سی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ کاپوچینو به همراه رست ۲۲۰ سی سی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ کاپوچینو به همراه رست ۲۲۰ سی سی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ کاپوچینو به همراه رست ۲۲۰ سی سی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ کاپوچینو به همراه رست ۲۲۰ سی سی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ کاپوچینو به همراه رست ۲۲۰ سی سی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="390000">
+    <td>کاپ اسپرسو به همراه رست ۱۲۰ سی سی </td>
+    <td>390000</td>
+    <td><input type="number" name="کاپ اسپرسو به همراه رست ۱۲۰ سی سی -Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ اسپرسو به همراه رست ۱۲۰ سی سی -Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ اسپرسو به همراه رست ۱۲۰ سی سی -Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ اسپرسو به همراه رست ۱۲۰ سی سی -Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ اسپرسو به همراه رست ۱۲۰ سی سی -Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="کاپ اسپرسو به همراه رست ۱۲۰ سی سی -Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="320000">
+    <td>ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ </td>
+    <td>320000</td>
+    <td><input type="number" name="ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ -Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ -Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ -Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ -Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ -Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="ماگ ۲۷۰ سی سی مدل هگزا، قطر ۸.۵ ارتفاع ۸ -Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr><tr data-price="245000">
+    <td> ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵</td>
+    <td>245000</td>
+    <td><input type="number" name=" ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name=" ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name=" ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name=" ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name=" ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name=" ماگ ۱۸۰ سی سی مدل هگزا ،قطر ۷.۵ ارتفاع ۶.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="195000">
+    <td>شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵</td>
+    <td>195000</td>
+    <td><input type="number" name="شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="شات اسپرسو ۹۰ سی سی مدل هگزا ، قطر ۶ ارتفاع ۵.۵-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+  <tr data-price="298000">
+    <td>لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی</td>
+    <td>298000</td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Off white" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Midnight blue" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Evergreen" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Sky steele" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Golden Amber" min="0" value="0" onchange="updateTotal()" /></td>
+    <td><input type="number" name="لیوان بدون دسته ارتفاع ۱۳ قطر ۸.۵ مناسب شیک و اسموتی-Warm cream" min="0" value="0" onchange="updateTotal()" /></td>
+    <td class="row-total">0</td>
+  </tr>
+</tbody>
+</table>
+
+<div class="summary">
+  <strong>جمع کل بدون تخفیف:</strong> <span id="raw-total">0</span> تومان<br />
+  <strong>تخفیف:</strong> <span id="discount-amount">0</span> تومان<br />
+  <strong>مبلغ نهایی قابل پرداخت:</strong> <span id="final-total">0</span> تومان
+</div>
+<style>
+  #order-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px 40px;
+    align-items: center;
+  }
+  #order-form label {
+    justify-self: end; /* لیبل‌ها سمت راست باشند */
+    font-weight: bold;
+  }
+  #order-form input[type="text"],
+  #order-form input[type="tel"] {
+    width: 100%;
+    padding: 6px 8px;
+    box-sizing: border-box;
+  }
+</style>
+<form id="order-form" onsubmit="submitForm(event)">
+  <label for="fullName">نام و نام خانوادگی:</label>
+  <input type="text" id="fullName" name="fullName" required placeholder="مثال: علی رضایی">
+
+  <label for="phone">شماره تماس:</label>
+  <input type="tel" id="phone" name="phone" required placeholder="مثال: 09123456789" pattern="[0-9]{10,11}">
+</form>
+  <label for="address">📍 آدرس ارسال:</label>
+  <input type="text" id="address" name="address" required placeholder="مثال: تهران، بلوار..." />
+  <label><input type="checkbox" id="send-whatsapp" /> ارسال سفارش به واتساپ</label>
+  <div class="whatsapp">
+    <button class="btn btn-send" type="submit">ثبت سفارش</button>
+    <button class="btn btn-clear" type="button" onclick="clearForm()">پاک کردن فرم</button>
+  </div>
+</form>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec';
+                     
+  function updateTotal() {
+    let totalPrice = 0;
+    const rows = document.querySelectorAll("tr[data-price]");
+
+    rows.forEach(row => {
+      const pricePerItem = parseInt(row.getAttribute('data-price')) || 0;
+      let rowQty = 0;
+      row.querySelectorAll("input[type='number']").forEach(input => {
+        rowQty += parseInt(input.value) || 0;
+      });
+      const rowTotal = rowQty * pricePerItem;
+      row.querySelector(".row-total").textContent = rowTotal.toLocaleString();
+      totalPrice += rowTotal;
+    });
+
+    const rawTotal = totalPrice;
+    let discount = 0;
+    if (rawTotal > 10000000 && rawTotal <= 15000000) discount = rawTotal * 0.05;
+    else if (rawTotal > 15000000 && rawTotal <= 20000000) discount = rawTotal * 0.10;
+    else if (rawTotal > 20000000 && rawTotal <= 30000000) discount = rawTotal * 0.20;
+    else if (rawTotal > 30000000 && rawTotal <= 40000000) discount = rawTotal * 0.25;
+    else if (rawTotal > 40000000) discount = rawTotal * 0.30;
+
+    const finalTotal = rawTotal - discount;
+
+    document.getElementById("raw-total").textContent = rawTotal.toLocaleString();
+    document.getElementById("discount-amount").textContent = discount.toLocaleString();
+    document.getElementById("final-total").textContent = finalTotal.toLocaleString();
+  }
+
+  function clearForm() {
+    document.querySelectorAll("#product-table input[type='number']").forEach(i => i.value = 0);
+    document.getElementById("address").value = "";
+    document.getElementById("fullName").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("send-whatsapp").checked = false;
+    updateTotal();
+  }
+  let isSubmitting = false;  // متغیر برای پیگیری ارسال فرم
+  function submitForm(e) {
+    e.preventDefault();
+
+    if (isSubmitting) return; // اگر در حال ارسال است، از ارسال دوباره جلوگیری کن
+    isSubmitting = true;  // تغییر وضعیت ارسال به true
+    
+    const fullName = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!fullName || !phone || !address) {
+      alert("لطفاً نام، شماره تماس و آدرس را کامل وارد کنید.");
+      return;
+    }
+
+    
+  const formData = new FormData();
+  formData.append("name", fullName);
+  formData.append("phone", phone);
+  formData.append("productList", order.join(" | "));
+  formData.append("color1", document.querySelector('[name="color1"]').value);
+  formData.append("color2", document.querySelector('[name="color2"]').value);
+  formData.append("color3", document.querySelector('[name="color3"]').value);
+  formData.append("color4", document.querySelector('[name="color4"]').value);
+  formData.append("color5", document.querySelector('[name="color5"]').value);
+  formData.append("color6", document.querySelector('[name="color6"]').value);
+  formData.append("total", raw);
+  formData.append("discount", discount);
+  formData.append("lasttotal", final);
+  formData.append("add", address);
+
+  // ارسال درخواست POST به اسکریپت گوگل
+  fetch('https://script.google.com/macros/s/AKfycbyLdrrkWYf56UADatuwh-WkaTQ87uffGBz34UTVTeZ2suvURT1Yc3LY8CQSSYJIaWlv/exec', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log('Success:', data);
+    alert('سفارش با موفقیت ثبت شد!');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('خطا در ارسال سفارش!');
+  });
+}
+
+
+
+
+  function sendToWhatsApp(fullName, phone, order, raw, discount, final, address) {
+    let message = `📦 سفارش PerlaPots:\nنام: ${fullName}\nشماره: ${phone}\n`;
+    message += order.map(x => "- " + x).join("\n");
+    message += `\n\nجمع کل: ${raw} تومان`;
+    if (discount !== "0") message += `\nتخفیف: ${discount} تومان`;
+    message += `\nمبلغ نهایی: ${final} تومان`;
+    message += `\nآدرس: ${address}`;
+
+    const phoneWA = "09361189022";
+    const url = `https://wa.me/98${phoneWA.slice(1)}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  }
+
+  document.getElementById("order-form").addEventListener("submit", submitForm);
+  document.querySelector(".btn-clear").addEventListener("click", clearForm);
+
+  updateTotal();
+</script>
+
+</body>
+</html>
